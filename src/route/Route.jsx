@@ -3,6 +3,10 @@ import Home from '../components/home/Home';
 import Products from '../components/products/Products';
 import MainLayout from '../layout/MainLayout';
 import Product from '../components/product/Product';
+import DashboardLayout from '../layout/DashboardLayout';
+import Dashboard from '../components/dashboard/Dashboard';
+import Profile from '../components/profile/Profile';
+import EditProfile from '../components/editprofile/EditProfile';
 
 
 const myCreatedRoute = createBrowserRouter([
@@ -23,13 +27,27 @@ const myCreatedRoute = createBrowserRouter([
             {
                 path: '/products/:id',
                 element: <Product></Product>,
-                loader: (object) => 
-                fetch(`https://dummyjson.com/products/${object.params.id}`)
+                loader: (object) =>
+                    fetch(`https://dummyjson.com/products/${object.params.id}`)
             },
 
             {
                 path: '/dashboard',
-                element: <div>dashboard</div>
+                element: <DashboardLayout></DashboardLayout>,
+                children: [
+                    {
+                        path: '/dashboard',
+                        element: <Dashboard></Dashboard>
+                    },
+                    {
+                        path: '/dashboard/profile',
+                        element: <Profile></Profile>
+                    },
+                    {
+                        path: '/dashboard/editProfile',
+                        element: <EditProfile></EditProfile>
+                    },
+                ]
             },
         ]
 
